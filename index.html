@@ -3,17 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>QuantHex | Advanced Trading Tools</title>
+    <title>QuantHex | Advanced Tools for Smarter Traders</title>
     <link rel="stylesheet" href="assets/css/style.css">
-    <!-- Google Fonts for Modern UI -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Space+Grotesk:wght@700&display=swap" rel="stylesheet">
 </head>
 <body>
 
-    <!-- Glass Navbar -->
+    <!-- Transparent Glass Navbar -->
     <nav class="glass-navbar">
         <div class="logo">
-            <span class="neon-icon">⬢</span> Quant<span class="text-gradient">Hex</span>
+            <!-- TERA ORIGINAL LOGO -->
+            <img src="assets/images/logo.png" alt="QuantHex Logo" class="logo-img">
+            Quant<span class="text-gradient">Hex</span>
         </div>
         <ul class="nav-links">
             <li><a href="#" class="active">Home</a></li>
@@ -21,7 +22,7 @@
             <li><a href="#">Market</a></li>
             <li><a href="#">Insights</a></li>
         </ul>
-        <button class="glass-btn small-btn">Dashboard</button>
+        <button class="glass-btn small-btn desktop-only">Dashboard</button>
     </nav>
 
     <!-- Hero Section -->
@@ -32,13 +33,23 @@
             <p class="subtitle">Advanced Tools for Smarter Traders.<br>Real-Time Data. Powerful Analytics.</p>
             <button class="glass-btn primary-btn glow-effect">Explore Tools →</button>
         </div>
-        
-        <!-- Background Glowing Orbs -->
-        <div class="orb orb-1"></div>
-        <div class="orb orb-2"></div>
     </section>
 
-    <!-- Tools Grid Showcase (Just 2 cards for testing the glass UI) -->
+    <!-- Market Feed Ticker -->
+    <div class="ticker-container glass-card">
+        <div class="ticker-label">Real-Time Market Feed <span class="live-dot"></span></div>
+        <div class="ticker-wrap">
+            <div class="ticker-move">
+                <div class="ticker-item">NIFTY 50 <span class="green">+0.75%</span></div>
+                <div class="ticker-item">BANK NIFTY <span class="green">+1.12%</span></div>
+                <div class="ticker-item">SENSEX <span class="green">+0.69%</span></div>
+                <div class="ticker-item">GOLD <span class="green">+0.31%</span></div>
+                <div class="ticker-item">USD/INR <span class="red">-0.12%</span></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tools Grid Showcase -->
     <section class="tools-showcase">
         <div class="section-header">
             <h3>Powerful Tools</h3>
@@ -49,7 +60,7 @@
             <div class="glass-card tool-card">
                 <div class="card-icon cyan-glow">🎯</div>
                 <h4>Pivot Point Calculator</h4>
-                <p>Calculate pivot points for smarter entry and exit trades.</p>
+                <p>Calculate pivot points for smarter trades. Find perfect entry and exit zones.</p>
             </div>
 
             <div class="glass-card tool-card">
@@ -57,9 +68,23 @@
                 <h4>Position Size Calculator</h4>
                 <p>Calculate ideal position size for perfect risk management.</p>
             </div>
+            
+            <div class="glass-card tool-card">
+                <div class="card-icon cyan-glow">🔗</div>
+                <h4>Option Chain Analyzer</h4>
+                <p>Analyze option chain data in real-time to find hidden support.</p>
+            </div>
+
+            <div class="glass-card tool-card">
+                <div class="card-icon purple-glow">🧠</div>
+                <h4>Market Sentiment</h4>
+                <p>Analyze market sentiment using AI and institutional data flow.</p>
+            </div>
 
         </div>
     </section>
 
+    <!-- JS Link -->
+    <script src="assets/js/main.js"></script>
 </body>
 </html>
