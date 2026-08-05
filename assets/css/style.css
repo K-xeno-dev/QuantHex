@@ -1,4 +1,4 @@
-/* ====== QUANT HEX MASTER THEME v4 ====== */
+/* ====== QUANT HEX MASTER THEME v5 (REAL CUT GLASS) ====== */
 :root {
     --bg-dark: #030712;
     --cyan: #06b6d4;
@@ -11,7 +11,7 @@
 
 * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
 
-/* --- BACKGROUND FIX (No Bouncing, Fast Loading) --- */
+/* --- BACKGROUND FIX --- */
 body {
     background-color: var(--bg-dark);
     color: var(--text-main);
@@ -19,33 +19,23 @@ body {
 }
 
 body::before {
-    content: "";
-    position: fixed;
-    top: 0; left: 0; width: 100vw; height: 100vh;
-    background-image: url('../images/bg.png'); /* MOBILE BG */
-    background-size: cover;
-    background-position: center bottom;
-    z-index: -1;
+    content: ""; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+    background-image: url('../images/bg.png'); 
+    background-size: cover; background-position: center bottom; z-index: -1;
 }
 
-/* DESKTOP BACKGROUND SWITCH */
 @media (min-width: 769px) {
     body::before {
-        background-image: url('../images/bg-desktop.png'); /* DESKTOP BG */
+        background-image: url('../images/bg-desktop.png'); 
         background-position: center center;
     }
 }
 
 /* --- GLASSMORPHISM & NAVBAR --- */
 .glass-navbar {
-    position: fixed;
-    top: 0; width: 100%;
-    padding: 15px 50px;
-    display: flex; justify-content: space-between; align-items: center;
-    background: rgba(3, 7, 18, 0.7);
-    backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
-    border-bottom: 1px solid var(--glass-border);
-    z-index: 1000;
+    position: fixed; top: 0; width: 100%; padding: 15px 50px; display: flex; justify-content: space-between; align-items: center;
+    background: rgba(3, 7, 18, 0.7); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
+    border-bottom: 1px solid var(--glass-border); z-index: 1000;
 }
 
 .logo { display: flex; align-items: center; gap: 10px; font-family: 'Space Grotesk', sans-serif; font-size: 24px; font-weight: 700; }
@@ -56,7 +46,6 @@ body::before {
 .nav-links a { color: var(--text-muted); text-decoration: none; font-size: 14px; transition: 0.3s; }
 .nav-links a:hover { color: var(--text-main); text-shadow: 0 0 8px var(--cyan); }
 
-/* HAMBURGER MENU CSS */
 .menu-toggle { display: none; flex-direction: column; cursor: pointer; gap: 5px; z-index: 1001; }
 .menu-toggle .bar { width: 25px; height: 3px; background-color: var(--text-main); border-radius: 3px; transition: 0.3s; }
 
@@ -66,44 +55,63 @@ body::before {
 .main-title { font-family: 'Space Grotesk', sans-serif; font-size: 70px; font-weight: 800; margin-bottom: 15px; letter-spacing: -1px; }
 .subtitle { font-size: 16px; color: var(--text-muted); line-height: 1.6; margin-bottom: 30px; }
 
-/* --- SHATTERED GLASS CARDS (PURE CSS) --- */
+/* =========================================================
+   REAL GLASS CARDS (EXACT SHAPE & 3D GLOWING EDGES)
+   ========================================================= */
 .glass-card {
-    background: linear-gradient(135deg, rgba(255,255,255,0.05) 0%, rgba(0,0,0,0.2) 100%);
+    background: rgba(5, 10, 25, 0.55); 
     backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    border-top: 1px solid rgba(139, 92, 246, 0.3);
-    border-left: 1px solid rgba(6, 182, 212, 0.3);
-    box-shadow: inset 0 0 20px rgba(6, 182, 212, 0.1), 0 8px 32px 0 rgba(0, 0, 0, 0.6);
-    border-radius: 12px;
+    
+    /* THE MAGIC: Kaate hue kone (Chamfered corners) just like your image */
+    clip-path: polygon(25px 0%, calc(100% - 25px) 0%, 100% 25px, 100% calc(100% - 25px), calc(100% - 25px) 100%, 25px 100%, 0% calc(100% - 25px), 0% 25px);
+    
     padding: 30px;
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    position: relative; overflow: hidden;
+    position: relative;
+    transition: all 0.4s ease;
 }
 
+/* 3D Glowing Edge (Simulating light hitting thick glass) */
 .glass-card::before {
-    content: ""; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
-    background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 60%);
-    opacity: 0; transition: 0.5s; pointer-events: none;
+    content: "";
+    position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+    z-index: 0; pointer-events: none;
+    
+    /* Matching the cut corners for the border */
+    clip-path: polygon(25px 0%, calc(100% - 25px) 0%, 100% 25px, 100% calc(100% - 25px), calc(100% - 25px) 100%, 25px 100%, 0% calc(100% - 25px), 0% 25px);
+    
+    /* 3D Bevel Light: Cyan on Left/Top, Purple on Right/Bottom */
+    box-shadow: 
+        inset 4px 4px 12px rgba(6, 182, 212, 0.7), 
+        inset -4px -4px 12px rgba(139, 92, 246, 0.7),
+        inset 0 0 25px rgba(255, 255, 255, 0.05);
+        
+    /* Crisp thin outer glass edge */
+    border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
-.glass-card:hover::before { opacity: 1; transform: scale(1.1); }
-.glass-card:hover {
-    transform: translateY(-8px) scale(1.02);
-    border: 1px solid rgba(139, 92, 246, 0.5);
-    box-shadow: inset 0 0 40px rgba(139, 92, 246, 0.2), 0 15px 30px rgba(6, 182, 212, 0.3);
+/* Glass Shine Reflection Animation */
+.glass-card::after {
+    content: ""; position: absolute; top: -150%; left: -50%; width: 50%; height: 300%;
+    background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.15), transparent);
+    transform: rotate(45deg); transition: 0.7s; z-index: 0; pointer-events: none;
 }
+
+.glass-card:hover { transform: translateY(-5px); background: rgba(10, 15, 30, 0.8); }
+.glass-card:hover::after { top: 100%; left: 100%; }
+
+/* Keeps text above the glass effects */
+.glass-card > * { position: relative; z-index: 2; }
 
 /* --- BUTTONS & PARTICLES --- */
 .glass-btn { background: rgba(255, 255, 255, 0.05); border: 1px solid var(--glass-border); color: var(--text-main); padding: 12px 30px; border-radius: 8px; cursor: pointer; font-weight: 600; transition: all 0.3s ease; }
 .primary-btn { position: relative; overflow: hidden; background: linear-gradient(90deg, rgba(6,182,212,0.2) 0%, rgba(139,92,246,0.2) 100%); border: 1px solid var(--cyan); font-size: 16px; border-radius: 30px; box-shadow: 0 0 15px rgba(6, 182, 212, 0.3); }
 .primary-btn:hover { box-shadow: 0 0 25px rgba(139, 92, 246, 0.6); transform: scale(1.05); }
 
-/* GLASS SHATTER CSS */
-.glass-particle { position: absolute; width: 6px; height: 6px; background: rgba(255, 255, 255, 0.9); box-shadow: 0 0 10px var(--cyan), 0 0 5px white; clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%); pointer-events: none; animation: shatter 0.6s ease-out forwards; }
+.glass-particle { position: absolute; width: 6px; height: 6px; background: rgba(255, 255, 255, 0.9); box-shadow: 0 0 10px var(--cyan), 0 0 5px white; clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%); pointer-events: none; animation: shatter 0.6s ease-out forwards; z-index: 999; }
 @keyframes shatter { 0% { transform: translate(0, 0) rotate(0deg) scale(1); opacity: 1; } 100% { transform: translate(var(--tx), var(--ty)) rotate(180deg) scale(0); opacity: 0; } }
 
 /* --- LIVE TICKER --- */
-.ticker-container { max-width: 1000px; margin: -40px auto 40px auto; padding: 15px 20px; display: flex; align-items: center; border-radius: 8px; }
+.ticker-container { max-width: 1000px; margin: -40px auto 40px auto; padding: 15px 20px; display: flex; align-items: center; }
 .ticker-label { font-weight: bold; font-size: 14px; margin-right: 20px; display: flex; align-items: center; gap: 8px; white-space: nowrap; }
 .live-dot { height: 8px; width: 8px; background-color: #10b981; border-radius: 50%; box-shadow: 0 0 8px #10b981; animation: blink 1.5s infinite; }
 @keyframes blink { 50% { opacity: 0.3; } }
@@ -121,22 +129,19 @@ body::before {
 .tool-card h4 { margin-bottom: 10px; font-size: 20px; }
 .tool-card p { color: var(--text-muted); font-size: 14px; line-height: 1.5; }
 
-/* --- MOBILE RESPONSIVENESS (Menu Fixes) --- */
+/* --- MOBILE RESPONSIVENESS --- */
 @media (max-width: 768px) {
     .glass-navbar { padding: 15px 20px; }
     .desktop-only { display: none; }
     .menu-toggle { display: flex; }
     
-    /* Sliding Mobile Menu */
     .nav-links {
         position: fixed; right: -100%; top: 60px; flex-direction: column;
         background: rgba(3, 7, 18, 0.95); backdrop-filter: blur(20px);
-        width: 60%; height: 100vh; padding: 40px 20px;
-        border-left: 1px solid var(--glass-border);
+        width: 60%; height: 100vh; padding: 40px 20px; border-left: 1px solid var(--glass-border);
     }
     .nav-links.active { right: 0; }
     
-    /* Hamburger Animation */
     .menu-toggle.active .bar:nth-child(1) { transform: translateY(8px) rotate(45deg); }
     .menu-toggle.active .bar:nth-child(2) { opacity: 0; }
     .menu-toggle.active .bar:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
