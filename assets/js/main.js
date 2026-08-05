@@ -1,6 +1,17 @@
 document.addEventListener('DOMContentLoaded', () => {
     
-    // SOUND SETUP (Placeholders)
+    // --- MOBILE HAMBURGER MENU LOGIC ---
+    const menuToggle = document.querySelector('.menu-toggle');
+    const navLinks = document.querySelector('.nav-links');
+
+    if(menuToggle) {
+        menuToggle.addEventListener('click', () => {
+            menuToggle.classList.toggle('active');
+            navLinks.classList.toggle('active');
+        });
+    }
+
+    // --- SOUND SETUP ---
     const hoverSound = new Audio('assets/sounds/hover.mp3');
     const clickSound = new Audio('assets/sounds/click.mp3');
     hoverSound.volume = 0.1;
@@ -20,9 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // ==========================================
-    // GLASS SHATTER EFFECT 
-    // ==========================================
+    // --- GLASS SHATTER EFFECT ---
     const exploreBtn = document.querySelector('.primary-btn');
     
     if(exploreBtn) {
@@ -32,14 +41,14 @@ document.addEventListener('DOMContentLoaded', () => {
             const x = e.clientX - rect.left;
             const y = e.clientY - rect.top;
 
-            for(let i = 0; i < 10; i++) {
+            for(let i = 0; i < 12; i++) {
                 let particle = document.createElement('span');
                 particle.className = 'glass-particle';
                 particle.style.left = x + 'px';
                 particle.style.top = y + 'px';
                 
                 let angle = Math.random() * Math.PI * 2;
-                let velocity = 60 + Math.random() * 60;
+                let velocity = 50 + Math.random() * 80;
                 let tx = Math.cos(angle) * velocity;
                 let ty = Math.sin(angle) * velocity;
                 
