@@ -11,56 +11,63 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- NAVIGATION SWITCHING LOGIC (Single Page App Feel) ---
+    // --- NAVIGATION SWITCHING LOGIC ---
     const navTools = document.getElementById('nav-tools');
-    const navMarket = document.getElementById('nav-market');
     const navStrategies = document.getElementById('nav-strategies');
     const exploreBtn = document.getElementById('explore-btn');
     const dynamicWrapper = document.getElementById('dynamic-content-wrapper');
     const heroSection = document.querySelector('.hero');
     const tickerContainer = document.querySelector('.ticker-container');
 
-    // Function to show/hide hero and ticker based on page view
     function updateLayout(isHome) {
         if (heroSection) heroSection.style.display = isHome ? 'flex' : 'none';
         if (tickerContainer) tickerContainer.style.display = isHome ? 'flex' : 'none';
     }
 
-    // Tools Click Event
+    // Function to fetch and render tools dynamically anywhere
+    function renderToolsSection(containerId, title, subtitle) {
+        dynamicWrapper.innerHTML = `
+            <section class="tools-showcase" style="padding-top: 100px;">
+                <div class="section-header">
+                    <h3>${title}</h3>
+                    <p>${subtitle}</p>
+                </div>
+                <div class="glass-grid" id="${containerId}">
+                    <!-- Dynamic tools will load here -->
+                </div>
+            </section>
+        `;
+
+        fetch('tools/manifest.json')
+            .then(response => response.json())
+            .then(data => {
+                const grid = document.getElementById(containerId);
+                if(!grid) return;
+                grid.innerHTML = "";
+                
+                data.tools.forEach(tool => {
+                    const card = document.createElement('div');
+                    card.className = 'glass-card tool-card';
+                    card.style.cursor = 'pointer';
+                    card.onclick = () => { window.location.href = tool.url; };
+                    
+                    card.innerHTML = `
+                        <div class="card-icon cyan-glow">${tool.icon || '⚡'}</div>
+                        <h4>${tool.name}</h4>
+                        <p>${tool.description}</p>
+                    `;
+                    grid.appendChild(card);
+                });
+            })
+            .catch(err => console.log('Manifest load error:', err));
+    }
+
+    // Tools Click Event in Navbar (Now fully automated from manifest.json)
     if(navTools) {
         navTools.addEventListener('click', (e) => {
             e.preventDefault();
             updateLayout(false);
-            dynamicWrapper.innerHTML = `
-                <section class="tools-showcase" style="padding-top: 100px;">
-                    <div class="section-header">
-                        <h3>All QuantHex Tools</h3>
-                        <p>Complete suite of professional trading calculators and analyzers.</p>
-                    </div>
-                    <div class="glass-grid">
-                        <div class="glass-card tool-card" onclick="alert('Opening Pivot Calculator...')">
-                            <div class="card-icon cyan-glow">🎯</div>
-                            <h4>Pivot Point Calculator</h4>
-                            <p>Calculate pivot points for smarter trades. Find perfect entry and exit zones.</p>
-                        </div>
-                        <div class="glass-card tool-card">
-                            <div class="card-icon purple-glow">⚖️</div>
-                            <h4>Position Size Calculator</h4>
-                            <p>Calculate ideal position size for perfect risk management.</p>
-                        </div>
-                        <div class="glass-card tool-card">
-                            <div class="card-icon cyan-glow">🔗</div>
-                            <h4>Option Chain Analyzer</h4>
-                            <p>Analyze option chain data in real-time to find hidden support.</p>
-                        </div>
-                        <div class="glass-card tool-card">
-                            <div class="card-icon purple-glow">🧠</div>
-                            <h4>Market Sentiment</h4>
-                            <p>Analyze market sentiment using AI and institutional data flow.</p>
-                        </div>
-                    </div>
-                </section>
-            `;
+            renderToolsSection('all-tools-grid', 'All QuantHex Tools', 'Complete suite of professional trading calculators and analyzers.');
             if(navLinks.classList.contains('active')) {
                 navLinks.classList.remove('active');
                 menuToggle.classList.remove('active');
@@ -68,7 +75,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Strategies Click Event (Replaced Insights)
+    // Strategies Click Event
     if(navStrategies) {
         navStrategies.addEventListener('click', (e) => {
             e.preventDefault();
@@ -107,7 +114,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- GLASS SHATTER EFFECT ON BUTTONS ---
+    // --- GLASS SHATTER EFFECT ---
     const primaryBtns = document.querySelectorAll('.primary-btn');
     primaryBtns.forEach(btn => {
         btn.addEventListener('click', function(e) {
