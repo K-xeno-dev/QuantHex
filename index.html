@@ -4,6 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>QuantHex | Advanced Tools for Smarter Traders</title>
+    
+    <!-- FAST LOADING: Browser ko pehle hi bata diya ki ye images sabse pehle uthani hain -->
+    <link rel="preload" href="assets/images/logo.png" as="image">
+    <link rel="preload" href="assets/images/bg.png" as="image">
+
     <link rel="stylesheet" href="assets/css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Space+Grotesk:wght@700&display=swap" rel="stylesheet">
 </head>
@@ -12,7 +17,8 @@
     <!-- Transparent Glass Navbar -->
     <nav class="glass-navbar">
         <div class="logo">
-            <img src="assets/images/logo.png" alt="QuantHex Logo" class="logo-img">
+            <!-- Fast loading attributes added to logo -->
+            <img src="assets/images/logo.png" alt="QuantHex Logo" class="logo-img" width="35" height="35" decoding="async">
             Quant<span class="text-gradient">Hex</span>
         </div>
         
