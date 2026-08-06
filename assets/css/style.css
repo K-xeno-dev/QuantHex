@@ -1,4 +1,4 @@
-/* ====== QUANT HEX MASTER THEME v4 ====== */
+/* ====== QUANT HEX MASTER THEME v6 (FAST LOAD) ====== */
 :root {
     --bg-dark: #030712;
     --cyan: #06b6d4;
@@ -11,9 +11,9 @@
 
 * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
 
-/* --- BACKGROUND FIX (No Bouncing, Fast Loading) --- */
+/* --- BACKGROUND FIX (Instant Dark Color + Fast Images) --- */
 body {
-    background-color: var(--bg-dark);
+    background-color: var(--bg-dark); /* Turant load hoga */
     color: var(--text-main);
     overflow-x: hidden;
 }
@@ -66,7 +66,7 @@ body::before {
 .main-title { font-family: 'Space Grotesk', sans-serif; font-size: 70px; font-weight: 800; margin-bottom: 15px; letter-spacing: -1px; }
 .subtitle { font-size: 16px; color: var(--text-muted); line-height: 1.6; margin-bottom: 30px; }
 
-/* --- SHATTERED GLASS CARDS (PURE CSS) --- */
+/* --- SHATTERED GLASS CARDS --- */
 .glass-card {
     background: linear-gradient(135deg, rgba(255,255,255,0.05) 0%, rgba(0,0,0,0.2) 100%);
     backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
@@ -121,13 +121,12 @@ body::before {
 .tool-card h4 { margin-bottom: 10px; font-size: 20px; }
 .tool-card p { color: var(--text-muted); font-size: 14px; line-height: 1.5; }
 
-/* --- MOBILE RESPONSIVENESS (Menu Fixes) --- */
+/* --- MOBILE RESPONSIVENESS --- */
 @media (max-width: 768px) {
     .glass-navbar { padding: 15px 20px; }
     .desktop-only { display: none; }
     .menu-toggle { display: flex; }
     
-    /* Sliding Mobile Menu */
     .nav-links {
         position: fixed; right: -100%; top: 60px; flex-direction: column;
         background: rgba(3, 7, 18, 0.95); backdrop-filter: blur(20px);
@@ -136,7 +135,6 @@ body::before {
     }
     .nav-links.active { right: 0; }
     
-    /* Hamburger Animation */
     .menu-toggle.active .bar:nth-child(1) { transform: translateY(8px) rotate(45deg); }
     .menu-toggle.active .bar:nth-child(2) { opacity: 0; }
     .menu-toggle.active .bar:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
