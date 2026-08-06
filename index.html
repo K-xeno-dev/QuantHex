@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>QuantHex | Advanced Tools for Smarter Traders</title>
     
-    <!-- FAST LOADING PRELOADS -->
     <link rel="preload" href="assets/images/logo.png" as="image">
     <link rel="preload" href="assets/images/bg.png" as="image">
 
@@ -14,14 +13,13 @@
 </head>
 <body>
 
-    <!-- Transparent Glass Navbar (Logo redirects to Home) -->
+    <!-- Transparent Glass Navbar -->
     <nav class="glass-navbar">
         <a href="index.html" class="logo" style="text-decoration: none; color: inherit;">
             <img src="assets/images/logo.png" alt="QuantHex Logo" class="logo-img" width="35" height="35" decoding="async">
             Quant<span class="text-gradient">Hex</span>
         </a>
         
-        <!-- Hamburger Icon for Mobile -->
         <div class="menu-toggle" id="mobile-menu">
             <span class="bar"></span>
             <span class="bar"></span>
@@ -61,42 +59,17 @@
         </div>
     </div>
 
-    <!-- Dynamic Content Area (Yehi area badlega jab user Tools ya Market click karega) -->
+    <!-- Dynamic Content Area -->
     <div id="dynamic-content-wrapper">
         
-        <!-- Tools Grid Showcase (Home Page Default View) -->
+        <!-- AUTOMATED TOOLS GRID (Yahan cards khud-bakhud load honge) -->
         <section class="tools-showcase" id="main-tools-section">
             <div class="section-header">
                 <h3>Powerful Tools</h3>
                 <p>All-in-one platform for every trader's need.</p>
             </div>
-            <div class="glass-grid" id="tools-grid-container">
-                
-                <!-- Default Static Cards (Future me ye auto-load honge) -->
-                <div class="glass-card tool-card">
-                    <div class="card-icon cyan-glow">🎯</div>
-                    <h4>Pivot Point Calculator</h4>
-                    <p>Calculate pivot points for smarter trades. Find perfect entry and exit zones.</p>
-                </div>
-
-                <div class="glass-card tool-card">
-                    <div class="card-icon purple-glow">⚖️</div>
-                    <h4>Position Size Calculator</h4>
-                    <p>Calculate ideal position size for perfect risk management.</p>
-                </div>
-                
-                <div class="glass-card tool-card">
-                    <div class="card-icon cyan-glow">🔗</div>
-                    <h4>Option Chain Analyzer</h4>
-                    <p>Analyze option chain data in real-time to find hidden support.</p>
-                </div>
-
-                <div class="glass-card tool-card">
-                    <div class="card-icon purple-glow">🧠</div>
-                    <h4>Market Sentiment</h4>
-                    <p>Analyze market sentiment using AI and institutional data flow.</p>
-                </div>
-
+            <div class="glass-grid" id="auto-tools-grid">
+                <!-- JavaScript automatically injects cards here -->
             </div>
         </section>
 
@@ -116,14 +89,14 @@
                 <h4>Platform</h4>
                 <ul>
                     <li><a href="index.html">Dashboard</a></li>
-                    <li><a href="#" onclick="loadSection('market')">Live Ticker</a></li>
-                    <li><a href="#" onclick="loadSection('tools')">Tool Suite</a></li>
+                    <li><a href="#">Live Ticker</a></li>
+                    <li><a href="#">Tool Suite</a></li>
                 </ul>
             </div>
             <div class="footer-col">
                 <h4>Resources</h4>
                 <ul>
-                    <li><a href="#" onclick="loadSection('strategies')">Strategies / Pine Script</a></li>
+                    <li><a href="#">Strategies / Pine Script</a></li>
                     <li><a href="#">Trading Guides</a></li>
                     <li><a href="#">Support</a></li>
                 </ul>
@@ -142,6 +115,33 @@
         </div>
     </footer>
 
+    <script>
+        // --- AUTOMATED CARD LOADER SCRIPT ---
+        document.addEventListener("DOMContentLoaded", function() {
+            fetch('tools/manifest.json')
+                .then(response => response.json())
+                .then(data => {
+                    const grid = document.getElementById('auto-tools-grid');
+                    if(!grid) return;
+                    grid.innerHTML = ""; // Clear old static cards
+                    
+                    data.tools.forEach(tool => {
+                        const card = document.createElement('div');
+                        card.className = 'glass-card tool-card';
+                        card.style.cursor = 'pointer';
+                        card.onclick = () => { window.location.href = tool.url; };
+                        
+                        card.innerHTML = `
+                            <div class="card-icon cyan-glow">${tool.icon || '⚡'}</div>
+                            <h4>${tool.name}</h4>
+                            <p>${tool.description}</p>
+                        `;
+                        grid.appendChild(card);
+                    });
+                })
+                .catch(err => console.log('Auto-loader error:', err));
+        });
+    </script>
     <script src="assets/js/main.js"></script>
 </body>
 </html>
