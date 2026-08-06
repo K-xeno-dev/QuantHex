@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (tickerContainer) tickerContainer.style.display = isHome ? 'flex' : 'none';
     }
 
-    // Render Tools View
+    // 1. Render Tools View
     function loadToolsPage() {
         updateLayout(false);
         dynamicWrapper.innerHTML = `
@@ -56,10 +56,11 @@ document.addEventListener('DOMContentLoaded', () => {
                     `;
                     grid.appendChild(card);
                 });
-            });
+            })
+            .catch(err => console.log('Tools error:', err));
     }
 
-    // Render Blogs & Strategies View (SEO Optimized & Auto-Loading)
+    // 2. Render Blogs & Strategies View
     function loadBlogsPage() {
         updateLayout(false);
         dynamicWrapper.innerHTML = `
@@ -78,31 +79,74 @@ document.addEventListener('DOMContentLoaded', () => {
                 const grid = document.getElementById('all-blogs-grid');
                 if(!grid) return;
                 grid.innerHTML = "";
-                data.blogs.forEach(blog => {
-                    const card = document.createElement('div');
-                    card.className = 'glass-card tool-card';
-                    card.style.cursor = 'pointer';
-                    card.onclick = () => { window.location.href = blog.url; };
-                    card.innerHTML = `
-                        <div class="card-icon purple-glow">📝</div>
-                        <div style="font-size: 12px; color: var(--cyan); margin-bottom: 5px;">${blog.date} • ${blog.readTime}</div>
-                        <h4>${blog.title}</h4>
-                        <p>${blog.description}</p>
-                    `;
-                    grid.appendChild(card);
-                });
+                if(data.blogs && data.blogs.length > 0) {
+                    data.blogs.forEach(blog => {
+                        const card = document.createElement('div');
+                        card.className = 'glass-card tool-card';
+                        card.style.cursor = 'pointer';
+                        card.onclick = () => { window.location.href = blog.url; };
+                        card.innerHTML = `
+                            <div class="card-icon purple-glow">📝</div>
+                            <div style="font-size: 12px; color: var(--cyan); margin-bottom: 5px;">${blog.date} • ${blog.readTime}</div>
+                            <h4>${blog.title}</h4>
+                            <p>${blog.description}</p>
+                        `;
+                        grid.appendChild(card);
+                    });
+                } else {
+                    grid.innerHTML = `<p style="color:var(--text-muted); text-align:center; grid-column:1/-1;">No blogs published yet. Stay tuned!</p>`;
+                }
             })
-            .catch(() => {
+            .catch(err => {
                 const grid = document.getElementById('all-blogs-grid');
-                if(grid) grid.innerHTML = `<p style="color:var(--text-muted); text-align:center; grid-column:1/-1;">No blogs published yet. Stay tuned!</p>`;
+                if(grid) {
+                    grid.innerHTML = `<p style="color:var(--text-muted); text-align:center; grid-column:1/-1;">No blogs published yet. Stay tuned!</p>`;
+                }
             });
     }
 
-    if(navTools) navTools.addEventListener('click', (e) => { e.preventDefault(); loadToolsPage(); if(navLinks.classList.contains('active')) { navLinks.classList.remove('active'); menuToggle.classList.remove('active'); } });
-    if(footerTools) footerTools.addEventListener('click', (e) => { e.preventDefault(); loadToolsPage(); window.scrollTo({top:0, behavior:'smooth'}); });
-    
-    if(navBlogs) navBlogs.addEventListener('click', (e) => { e.preventDefault(); loadBlogsPage(); if(navLinks.classList.contains('active')) { navLinks.classList.remove('active'); menuToggle.classList.remove('active'); } });
-    if(footerBlogs) footerBlogs.addEventListener('click', (e) => { e.preventDefault(); loadBlogsPage(); window.scrollTo({top:0, behavior:'smooth'}); });
+    // Event Listeners
+    if(navTools) {
+        navTools.addEventListener('click', (e) => {
+            e.preventDefault();
+            loadToolsPage();
+            if(navLinks.classList.contains('active')) {
+                navLinks.classList.remove('active');
+                menuToggle.classList.remove('active');
+            }
+        });
+    }
 
-    if(exploreBtn) exploreBtn.addEventListener('click', () => { loadToolsPage(); });
+    if(footerTools) {
+        footerTools.addEventListener('click', (e) => {
+            e.preventDefault();
+            loadToolsPage();
+            window.scrollTo({top:0, behavior:'smooth'});
+        });
+    }
+    
+    if(navBlogs) {
+        navBlogs.addEventListener('click', (e) => {
+            e.preventDefault();
+            loadBlogsPage();
+            if(navLinks.classList.contains('active')) {
+                navLinks.classList.remove('active');
+                menuToggle.classList.remove('active');
+            }
+        });
+    }
+
+    if(footerBlogs) {
+        footerBlogs.addEventListener('click', (e) => {
+            e.preventDefault();
+            loadBlogsPage();
+            window.scrollTo({top:0, behavior:'smooth'});
+        });
+    }
+
+    if(exploreBtn) {
+        exploreBtn.addEventListener('click', () => {
+            loadToolsPage();
+        });
+    }
 });
