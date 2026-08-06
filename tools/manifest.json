@@ -1,0 +1,10 @@
+{
+  "tools": [
+    {
+      "name": "Pivot Point Calculator",
+      "description": "Calculate pivot points for smarter trades. Find perfect entry and exit zones.",
+      "url": "tools/pivot-calculator.html",
+      "icon": "🎯"
+    }
+  ]
+}
