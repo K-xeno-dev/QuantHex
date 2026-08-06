@@ -1,11 +1,1 @@
-{
-  "blogs": [
-    {
-      "title": "How to Use Pivot Points Like a Pro Trader",
-      "description": "Master support and resistance levels using the Floor Traders Method to boost your intraday accuracy.",
-      "url": "blogs/how-to-use-pivot-points.html",
-      "date": "August 6, 2026",
-      "readTime": "4 min read"
-    }
-  ]
-}
+{"blogs": [{"title": "How to Use Pivot Points Like a Pro", "description": "Master support and resistance levels easily.", "url": "blogs/how-to-use-pivot-points.html", "date": "Aug 6, 2026", "readTime": "4 min"}]}
