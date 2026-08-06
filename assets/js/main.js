@@ -13,10 +13,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Elements
     const navTools = document.getElementById('nav-tools');
-    const navBlogs = document.getElementById('nav-blogs');
+    const navStrategies = document.getElementById('nav-strategies');
     const exploreBtn = document.getElementById('explore-btn');
     const footerTools = document.getElementById('footer-tools-link');
-    const footerBlogs = document.getElementById('footer-blogs-link');
+    const footerStrategies = document.getElementById('footer-strategies-link');
     const dynamicWrapper = document.getElementById('dynamic-content-wrapper');
     const heroSection = document.querySelector('.hero');
     const tickerContainer = document.querySelector('.ticker-container');
@@ -61,23 +61,23 @@ document.addEventListener('DOMContentLoaded', () => {
             .catch(err => console.log('Tools error:', err));
     }
 
-    // 2. Render Blogs & Strategies View
-    function loadBlogsPage() {
+    // 2. Render Strategies View (Dynamic & Empty until user adds real blog/strategy)
+    function loadStrategiesPage() {
         updateLayout(false);
         dynamicWrapper.innerHTML = `
             <section class="tools-showcase" style="padding-top: 100px;">
                 <div class="section-header">
-                    <h3>Trading Blogs & Strategies</h3>
-                    <p>Expert insights, algorithmic trading setups, and market guides.</p>
+                    <h3>Trading Strategies & Insights</h3>
+                    <p>Expert algorithms, setups, and institutional guides.</p>
                 </div>
-                <div class="glass-grid" id="all-blogs-grid"></div>
+                <div class="glass-grid" id="all-strategies-grid"></div>
             </section>
         `;
 
         fetch('blogs/manifest.json')
             .then(res => res.json())
             .then(data => {
-                const grid = document.getElementById('all-blogs-grid');
+                const grid = document.getElementById('all-strategies-grid');
                 if(!grid) return;
                 grid.innerHTML = "";
                 if(data.blogs && data.blogs.length > 0) {
@@ -87,7 +87,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         card.style.cursor = 'pointer';
                         card.onclick = () => { window.location.href = blog.url; };
                         card.innerHTML = `
-                            <div class="card-icon purple-glow">📝</div>
+                            <div class="card-icon purple-glow">📈</div>
                             <div style="font-size: 12px; color: var(--cyan); margin-bottom: 5px;">${blog.date} • ${blog.readTime}</div>
                             <h4>${blog.title}</h4>
                             <p>${blog.description}</p>
@@ -95,13 +95,13 @@ document.addEventListener('DOMContentLoaded', () => {
                         grid.appendChild(card);
                     });
                 } else {
-                    grid.innerHTML = `<p style="color:var(--text-muted); text-align:center; grid-column:1/-1;">No blogs published yet. Stay tuned!</p>`;
+                    grid.innerHTML = `<p style="color:var(--text-muted); text-align:center; grid-column:1/-1; padding: 40px;">No strategies published yet. Stay tuned for expert setups!</p>`;
                 }
             })
-            .catch(err => {
-                const grid = document.getElementById('all-blogs-grid');
+            .catch(() => {
+                const grid = document.getElementById('all-strategies-grid');
                 if(grid) {
-                    grid.innerHTML = `<p style="color:var(--text-muted); text-align:center; grid-column:1/-1;">No blogs published yet. Stay tuned!</p>`;
+                    grid.innerHTML = `<p style="color:var(--text-muted); text-align:center; grid-column:1/-1; padding: 40px;">No strategies published yet. Stay tuned for expert setups!</p>`;
                 }
             });
     }
@@ -127,10 +127,10 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
     
-    if(navBlogs) {
-        navBlogs.addEventListener('click', (e) => {
+    if(navStrategies) {
+        navStrategies.addEventListener('click', (e) => {
             e.preventDefault();
-            loadBlogsPage();
+            loadStrategiesPage();
             if(navLinks.classList.contains('active')) {
                 navLinks.classList.remove('active');
                 menuToggle.classList.remove('active');
@@ -138,10 +138,10 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    if(footerBlogs) {
-        footerBlogs.addEventListener('click', (e) => {
+    if(footerStrategies) {
+        footerStrategies.addEventListener('click', (e) => {
             e.preventDefault();
-            loadBlogsPage();
+            loadStrategiesPage();
             window.scrollTo({top:0, behavior:'smooth'});
         });
     }
