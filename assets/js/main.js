@@ -11,6 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // Elements
     const navTools = document.getElementById('nav-tools');
     const navBlogs = document.getElementById('nav-blogs');
     const exploreBtn = document.getElementById('explore-btn');
@@ -105,7 +106,8 @@ document.addEventListener('DOMContentLoaded', () => {
             });
     }
 
-    // Event Listeners
+    // --- EVENT LISTENERS ---
+    
     if(navTools) {
         navTools.addEventListener('click', (e) => {
             e.preventDefault();
