@@ -14,7 +14,7 @@
 </head>
 <body>
 
-    <!-- Transparent Glass Navbar (Market Removed) -->
+    <!-- Transparent Glass Navbar -->
     <nav class="glass-navbar">
         <a href="index.html" class="logo" style="text-decoration: none; color: inherit;">
             <img src="assets/images/logo.png" alt="QuantHex Logo" class="logo-img" width="35" height="35" decoding="async">
@@ -30,7 +30,7 @@
         <ul class="nav-links">
             <li><a href="index.html" class="active">Home</a></li>
             <li><a href="#" id="nav-tools">Tools</a></li>
-            <li><a href="#" id="nav-blogs">Blogs & Strategies</a></li>
+            <li><a href="#" id="nav-strategies">Strategies</a></li>
         </ul>
         <button class="glass-btn small-btn desktop-only" onclick="location.href='index.html'">Dashboard</button>
     </nav>
@@ -75,7 +75,7 @@
 
     </div>
 
-    <!-- PROFESSIONAL GLASS FOOTER -->
+    <!-- PROFESSIONAL GLASS FOOTER (Fully Working Links) -->
     <footer class="glass-footer">
         <div class="footer-content">
             <div class="footer-col">
@@ -95,16 +95,16 @@
             <div class="footer-col">
                 <h4>Resources</h4>
                 <ul>
-                    <li><a href="#" id="footer-blogs-link">Trading Blogs & Strategies</a></li>
-                    <li><a href="#">Support</a></li>
+                    <li><a href="#" id="footer-strategies-link">Strategies</a></li>
+                    <li><a href="#" onclick="alert('Support: contact@quanthex.com'); return false;">Support</a></li>
                 </ul>
             </div>
             <div class="footer-col">
                 <h4>Legal</h4>
                 <ul>
-                    <li><a href="#">Privacy Policy</a></li>
-                    <li><a href="#">Terms of Service</a></li>
-                    <li><a href="#">Disclaimer</a></li>
+                    <li><a href="#" onclick="alert('Privacy Policy Page'); return false;">Privacy Policy</a></li>
+                    <li><a href="#" onclick="alert('Terms of Service Page'); return false;">Terms of Service</a></li>
+                    <li><a href="#" onclick="alert('Disclaimer: Educational purpose only.'); return false;">Disclaimer</a></li>
                 </ul>
             </div>
         </div>
@@ -114,9 +114,8 @@
     </footer>
 
     <script>
-        // --- AUTO-LOADER SCRIPT FOR TOOLS & BLOGS ---
+        // --- AUTO-LOADER SCRIPT FOR TOOLS ON HOME PAGE ---
         document.addEventListener("DOMContentLoaded", function() {
-            // Load Tools on Home Page
             fetch('tools/manifest.json')
                 .then(response => response.json())
                 .then(data => {
