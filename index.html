@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>QuantHex | Advanced Tools for Smarter Traders</title>
+    <title>QuantHex | Advanced Tools & Trading Strategies for Smart Traders</title>
+    <meta name="description" content="QuantHex provides advanced real-time trading calculators, custom Pine Script strategies, and institutional market analytics.">
     
     <link rel="preload" href="assets/images/logo.png" as="image">
     <link rel="preload" href="assets/images/bg.png" as="image">
@@ -13,7 +14,7 @@
 </head>
 <body>
 
-    <!-- Transparent Glass Navbar -->
+    <!-- Transparent Glass Navbar (Market Removed) -->
     <nav class="glass-navbar">
         <a href="index.html" class="logo" style="text-decoration: none; color: inherit;">
             <img src="assets/images/logo.png" alt="QuantHex Logo" class="logo-img" width="35" height="35" decoding="async">
@@ -29,8 +30,7 @@
         <ul class="nav-links">
             <li><a href="index.html" class="active">Home</a></li>
             <li><a href="#" id="nav-tools">Tools</a></li>
-            <li><a href="#" id="nav-market">Market</a></li>
-            <li><a href="#" id="nav-strategies">Strategies</a></li>
+            <li><a href="#" id="nav-blogs">Blogs & Strategies</a></li>
         </ul>
         <button class="glass-btn small-btn desktop-only" onclick="location.href='index.html'">Dashboard</button>
     </nav>
@@ -62,14 +62,14 @@
     <!-- Dynamic Content Area -->
     <div id="dynamic-content-wrapper">
         
-        <!-- AUTOMATED TOOLS GRID (Yahan cards khud-bakhud load honge) -->
+        <!-- AUTOMATED TOOLS GRID -->
         <section class="tools-showcase" id="main-tools-section">
             <div class="section-header">
                 <h3>Powerful Tools</h3>
                 <p>All-in-one platform for every trader's need.</p>
             </div>
             <div class="glass-grid" id="auto-tools-grid">
-                <!-- JavaScript automatically injects cards here -->
+                <!-- JavaScript automatically injects tools here -->
             </div>
         </section>
 
@@ -89,15 +89,13 @@
                 <h4>Platform</h4>
                 <ul>
                     <li><a href="index.html">Dashboard</a></li>
-                    <li><a href="#">Live Ticker</a></li>
-                    <li><a href="#">Tool Suite</a></li>
+                    <li><a href="#" id="footer-tools-link">Tool Suite</a></li>
                 </ul>
             </div>
             <div class="footer-col">
                 <h4>Resources</h4>
                 <ul>
-                    <li><a href="#">Strategies / Pine Script</a></li>
-                    <li><a href="#">Trading Guides</a></li>
+                    <li><a href="#" id="footer-blogs-link">Trading Blogs & Strategies</a></li>
                     <li><a href="#">Support</a></li>
                 </ul>
             </div>
@@ -116,14 +114,15 @@
     </footer>
 
     <script>
-        // --- AUTOMATED CARD LOADER SCRIPT ---
+        // --- AUTO-LOADER SCRIPT FOR TOOLS & BLOGS ---
         document.addEventListener("DOMContentLoaded", function() {
+            // Load Tools on Home Page
             fetch('tools/manifest.json')
                 .then(response => response.json())
                 .then(data => {
                     const grid = document.getElementById('auto-tools-grid');
                     if(!grid) return;
-                    grid.innerHTML = ""; // Clear old static cards
+                    grid.innerHTML = "";
                     
                     data.tools.forEach(tool => {
                         const card = document.createElement('div');
@@ -139,7 +138,7 @@
                         grid.appendChild(card);
                     });
                 })
-                .catch(err => console.log('Auto-loader error:', err));
+                .catch(err => console.log('Tools load error:', err));
         });
     </script>
     <script src="assets/js/main.js"></script>
