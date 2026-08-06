@@ -14,12 +14,12 @@
 </head>
 <body>
 
-    <!-- Transparent Glass Navbar -->
+    <!-- Transparent Glass Navbar (Logo redirects to Home) -->
     <nav class="glass-navbar">
-        <div class="logo">
+        <a href="index.html" class="logo" style="text-decoration: none; color: inherit;">
             <img src="assets/images/logo.png" alt="QuantHex Logo" class="logo-img" width="35" height="35" decoding="async">
             Quant<span class="text-gradient">Hex</span>
-        </div>
+        </a>
         
         <!-- Hamburger Icon for Mobile -->
         <div class="menu-toggle" id="mobile-menu">
@@ -29,12 +29,12 @@
         </div>
 
         <ul class="nav-links">
-            <li><a href="#" class="active">Home</a></li>
-            <li><a href="#">Tools</a></li>
-            <li><a href="#">Market</a></li>
-            <li><a href="#">Insights</a></li>
+            <li><a href="index.html" class="active">Home</a></li>
+            <li><a href="#" id="nav-tools">Tools</a></li>
+            <li><a href="#" id="nav-market">Market</a></li>
+            <li><a href="#" id="nav-strategies">Strategies</a></li>
         </ul>
-        <button class="glass-btn small-btn desktop-only">Dashboard</button>
+        <button class="glass-btn small-btn desktop-only" onclick="location.href='index.html'">Dashboard</button>
     </nav>
 
     <!-- Hero Section -->
@@ -43,7 +43,7 @@
             <h2 class="pre-title">Welcome to</h2>
             <h1 class="main-title">Quant<span class="text-gradient">Hex</span></h1>
             <p class="subtitle">Advanced Tools for Smarter Traders.<br>Real-Time Data. Powerful Analytics.</p>
-            <button class="glass-btn primary-btn glow-effect">Explore Tools →</button>
+            <button class="glass-btn primary-btn glow-effect" id="explore-btn">Explore Tools →</button>
         </div>
     </section>
 
@@ -61,63 +61,69 @@
         </div>
     </div>
 
-    <!-- Tools Grid Showcase -->
-    <section class="tools-showcase">
-        <div class="section-header">
-            <h3>Powerful Tools</h3>
-            <p>All-in-one platform for every trader's need.</p>
-        </div>
-        <div class="glass-grid">
-            
-            <div class="glass-card tool-card">
-                <div class="card-icon cyan-glow">🎯</div>
-                <h4>Pivot Point Calculator</h4>
-                <p>Calculate pivot points for smarter trades. Find perfect entry and exit zones.</p>
+    <!-- Dynamic Content Area (Yehi area badlega jab user Tools ya Market click karega) -->
+    <div id="dynamic-content-wrapper">
+        
+        <!-- Tools Grid Showcase (Home Page Default View) -->
+        <section class="tools-showcase" id="main-tools-section">
+            <div class="section-header">
+                <h3>Powerful Tools</h3>
+                <p>All-in-one platform for every trader's need.</p>
             </div>
+            <div class="glass-grid" id="tools-grid-container">
+                
+                <!-- Default Static Cards (Future me ye auto-load honge) -->
+                <div class="glass-card tool-card">
+                    <div class="card-icon cyan-glow">🎯</div>
+                    <h4>Pivot Point Calculator</h4>
+                    <p>Calculate pivot points for smarter trades. Find perfect entry and exit zones.</p>
+                </div>
 
-            <div class="glass-card tool-card">
-                <div class="card-icon purple-glow">⚖️</div>
-                <h4>Position Size Calculator</h4>
-                <p>Calculate ideal position size for perfect risk management.</p>
-            </div>
-            
-            <div class="glass-card tool-card">
-                <div class="card-icon cyan-glow">🔗</div>
-                <h4>Option Chain Analyzer</h4>
-                <p>Analyze option chain data in real-time to find hidden support.</p>
-            </div>
+                <div class="glass-card tool-card">
+                    <div class="card-icon purple-glow">⚖️</div>
+                    <h4>Position Size Calculator</h4>
+                    <p>Calculate ideal position size for perfect risk management.</p>
+                </div>
+                
+                <div class="glass-card tool-card">
+                    <div class="card-icon cyan-glow">🔗</div>
+                    <h4>Option Chain Analyzer</h4>
+                    <p>Analyze option chain data in real-time to find hidden support.</p>
+                </div>
 
-            <div class="glass-card tool-card">
-                <div class="card-icon purple-glow">🧠</div>
-                <h4>Market Sentiment</h4>
-                <p>Analyze market sentiment using AI and institutional data flow.</p>
-            </div>
+                <div class="glass-card tool-card">
+                    <div class="card-icon purple-glow">🧠</div>
+                    <h4>Market Sentiment</h4>
+                    <p>Analyze market sentiment using AI and institutional data flow.</p>
+                </div>
 
-        </div>
-    </section>
+            </div>
+        </section>
+
+    </div>
 
     <!-- PROFESSIONAL GLASS FOOTER -->
     <footer class="glass-footer">
         <div class="footer-content">
             <div class="footer-col">
-                <div class="logo footer-logo">
+                <a href="index.html" class="logo footer-logo" style="text-decoration: none; color: inherit; display: inline-flex;">
                     <img src="assets/images/logo.png" alt="QuantHex Logo" class="logo-img" width="30" height="30">
                     Quant<span class="text-gradient">Hex</span>
-                </div>
+                </a>
                 <p class="footer-desc">Advanced trading analytics and real-time tools designed for smart market participants.</p>
             </div>
             <div class="footer-col">
                 <h4>Platform</h4>
                 <ul>
-                    <li><a href="#">Dashboard</a></li>
-                    <li><a href="#">Live Ticker</a></li>
-                    <li><a href="#">Tool Suite</a></li>
+                    <li><a href="index.html">Dashboard</a></li>
+                    <li><a href="#" onclick="loadSection('market')">Live Ticker</a></li>
+                    <li><a href="#" onclick="loadSection('tools')">Tool Suite</a></li>
                 </ul>
             </div>
             <div class="footer-col">
                 <h4>Resources</h4>
                 <ul>
-                    <li><a href="#">API Docs</a></li>
+                    <li><a href="#" onclick="loadSection('strategies')">Strategies / Pine Script</a></li>
                     <li><a href="#">Trading Guides</a></li>
                     <li><a href="#">Support</a></li>
                 </ul>
