@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pivot Point Calculator | QuantHex</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Space+Grotesk:wght@700&display=swap" rel="stylesheet">
+    <style>
+        .calculator-container {
+            max-width: 600px;
+            margin: 120px auto 60px auto;
+            padding: 30px;
+        }
+        .input-group {
+            margin-bottom: 20px;
+        }
+        .input-group label {
+            display: block;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+        .input-group input {
+            width: 100%;
+            padding: 12px 15px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--glass-border);
+            border-radius: 8px;
+            color: var(--text-main);
+            font-size: 16px;
+            outline: none;
+            transition: 0.3s;
+        }
+        .input-group input:focus {
+            border-color: var(--cyan);
+            box-shadow: 0 0 10px rgba(6, 182, 212, 0.2);
+        }
+        .calc-btn {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(90deg, var(--cyan), var(--purple));
+            border: none;
+            border-radius: 8px;
+            color: white;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+            margin-top: 10px;
+        }
+        .calc-btn:hover {
+            opacity: 0.9;
+            box-shadow: 0 0 20px rgba(6, 182, 212, 0.4);
+        }
+        .results-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 25px;
+        }
+        .result-box {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .result-box span {
+            color: var(--text-muted);
+            font-size: 13px;
+            display: block;
+            margin-bottom: 5px;
+        }
+        .result-box strong {
+            font-size: 18px;
+            color: var(--text-main);
+        }
+        .res-green { color: #10b981 !important; }
+        .res-red { color: #ef4444 !important; }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="glass-navbar">
+        <a href="../index.html" class="logo" style="text-decoration: none; color: inherit;">
+            <img src="../assets/images/logo.png" alt="QuantHex Logo" class="logo-img" width="35" height="35">
+            Quant<span class="text-gradient">Hex</span>
+        </a>
+        <ul class="nav-links">
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="../index.html" class="active">Tools</a></li>
+        </ul>
+    </nav>
+
+    <!-- Calculator Box -->
+    <div class="glass-card calculator-container">
+        <div class="section-header" style="margin-bottom: 20px;">
+            <h3>🎯 Pivot Point Calculator</h3>
+            <p>Standard Pivot Points (Floor Traders Method)</p>
+        </div>
+
+        <div class="input-group">
+            <label>High Price (H)</label>
+            <input type="number" id="highPrice" placeholder="e.g. 22500">
+        </div>
+        <div class="input-group">
+            <label>Low Price (L)</label>
+            <input type="number" id="lowPrice" placeholder="e.g. 22300">
+        </div>
+        <div class="input-group">
+            <label>Close Price (C)</label>
+            <input type="number" id="closePrice" placeholder="e.g. 22450">
+        </div>
+
+        <button class="calc-btn" onclick="calculatePivot()">Calculate Levels</button>
+
+        <div class="results-grid" id="resultArea" style="display: none;">
+            <div class="result-box">
+                <span>Resistance 2 (R2)</span>
+                <strong id="r2" class="res-red">-</strong>
+            </div>
+            <div class="result-box">
+                <span>Resistance 1 (R1)</span>
+                <strong id="r1" class="res-red">-</strong>
+            </div>
+            <div class="result-box" style="grid-column: span 2; border-color: var(--cyan);">
+                <span>Pivot Point (PP)</span>
+                <strong id="pp" style="color: var(--cyan);">-</strong>
+            </div>
+            <div class="result-box">
+                <span>Support 1 (S1)</span>
+                <strong id="s1" class="res-green">-</strong>
+            </div>
+            <div class="result-box">
+                <span>Support 2 (S2)</span>
+                <strong id="s2" class="res-green">-</strong>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function calculatePivot() {
+            let H = parseFloat(document.getElementById('highPrice').value);
+            let L = parseFloat(document.getElementById('lowPrice').value);
+            let C = parseFloat(document.getElementById('closePrice').value);
+
+            if(isNaN(H) || isNaN(L) || isNaN(C)) {
+                alert('Bhai, kripya High, Low aur Close teeno values sahi se bhare!');
+                return;
+            }
+
+            // Pivot Formula (Standard / Floor Traders)
+            let PP = (H + L + C) / 3;
+            let R1 = (2 * PP) - L;
+            let S1 = (2 * PP) - H;
+            let R2 = PP + (H - L);
+            let S2 = PP - (H - L);
+
+            document.getElementById('pp').innerText = PP.toFixed(2);
+            document.getElementById('r1').innerText = R1.toFixed(2);
+            document.getElementById('s1').innerText = S1.toFixed(2);
+            document.getElementById('r2').innerText = R2.toFixed(2);
+            document.getElementById('s2').innerText = S2.toFixed(2);
+
+            document.getElementById('resultArea').style.display = 'grid';
+        }
+    </script>
+</body>
+</html>
